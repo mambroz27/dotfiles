@@ -1,0 +1,138 @@
+{
+  "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+  "version": 1,
+  "final_space": true,
+  "console_title_template": "{{ .Shell }} in {{ .Folder }}",
+  "blocks": [
+    {
+      "type": "prompt",
+      "alignment": "left",
+      "newline": true,
+      "segments": [
+        {
+          "type": "os",
+          "style": "diamond",
+          "leading_diamond": "\ue0c7 ",
+          "trailing_diamond": "\ue0b4",
+          "foreground": "p:foreground-dark",
+          "background": "p:system",
+          "template": " {{ if .WSL }}\u2771\ue62a{{ end }}{{.Icon}} "
+        },
+        {
+          "type": "path",
+          "style": "diamond",
+          "trailing_diamond": "\ue0b4",
+          "foreground": "p:foreground-dark",
+          "background": "p:path",
+          "template": " {{ .Path }} ",
+          "options": {
+            "style": "full"
+          }
+        },
+        {
+          "type": "git",
+          "style": "diamond",
+          "trailing_diamond": "\ue0b4",
+          "foreground": "p:foreground-dark",
+          "background": "p:git",
+          "background_templates": [
+            "{{ if or (.Working.Changed) (.Staging.Changed) }}p:git-modified{{ end }}",
+            "{{ if and (gt .Ahead 0) (gt .Behind 0) }}p:git-diverged{{ end }}",
+            "{{ if gt .Ahead 0 }}p:git-ahead{{ end }}",
+            "{{ if gt .Behind 0 }}p:git-behind{{ end }}"
+          ],
+          "template": " {{ .UpstreamIcon }}{{ .HEAD }}{{ if gt .StashCount 0 }} \uf0c7 {{ .StashCount }}{{ end }} ",
+          "options": {
+            "fetch_status": true,
+            "fetch_upstream_icon": true
+          }
+        }
+      ]
+    },
+    {
+      "type": "rprompt",
+      "overflow": "hidden",
+      "segments": [
+        {
+          "type": "status",
+          "style": "diamond",
+          "leading_diamond": "\ue0b6",
+          "foreground": "p:foreground-dark",
+          "background": "p:code",
+          "background_templates": [
+            "{{if gt .Code 0}}p:code-err{{end}}",
+            "{{if eq .Code 0}}p:code-ok{{end}}"
+          ],
+          "template": " {{ if eq .Code 0 }}\uf058{{ else }}\uf071{{ end }} "
+        },
+        {
+          "type": "executiontime",
+          "style": "diamond",
+          "leading_diamond": "\ue0b6",
+          "foreground": "p:foreground-dark",
+          "background": "p:timer",
+          "template": " {{ .FormattedMs }} ",
+          "options": {
+            "threshold": 5000
+          }
+        },
+        {
+          "type": "time",
+          "style": "diamond",
+          "leading_diamond": "\ue0b6",
+          "trailing_diamond": "\ue0c6 ",
+          "foreground": "p:foreground-dark",
+          "background": "p:system",
+          "template": "{{ .CurrentDate | date .Format }}",
+          "options": {
+            "time_format": "15:04 (01/02)"
+          }
+        }
+      ]
+    },
+    {
+      "type": "prompt",
+      "alignment": "left",
+      "newline": true,
+      "segments": [
+        {
+          "type": "text",
+          "style": "plain",
+          "foreground_templates": [
+            "{{if gt .Code 0}}p:code-err{{end}}",
+            "{{if eq .Code 0}}p:system{{end}}"
+          ],
+          "background": "transparent",
+          "template": "\u276f "
+        }
+      ]
+    }
+  ],
+  "transient_prompt": {
+    "foreground_templates": [
+      "{{if gt .Code 0}}p.code-err{{end}}",
+      "{{if eq .Code 0}}p.system{{end}}"
+    ],
+    "background": "transparent",
+    "template": "\u276f "
+  },
+  "secondary_prompt": {
+    "foreground": "p:system",
+    "background": "transparent",
+    "template": "<p:path>\u276f</path>\u276f "
+  },
+  "palette": {
+    "foreground-dark": "#171c28",
+    "system": "#d7dce2",
+    "path": "#5ccfe6",
+    "git": "#bae67e",
+    "git-modified": "#ffd580",
+    "git-diverged": "#ffae57",
+    "git-ahead": "#c3a6ff",
+    "git-behind": "#c3a6ff",
+    "code": "#5ccfe6",
+    "code-ok": "#5ccfe6",
+    "code-err": "#ef6b73",
+    "timer": "#ffae57"
+  }
+}
