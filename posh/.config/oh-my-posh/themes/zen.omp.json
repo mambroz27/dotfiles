@@ -62,14 +62,14 @@
       "newline": true,
       "segments": [
         {
-          "type": "text",
+          "type": "os",
           "style": "plain",
           "foreground_templates": [
             "{{if gt .Code 0}}p:code-err{{end}}",
             "{{if eq .Code 0}}p:system{{end}}"
           ],
           "background": "transparent",
-          "template": "\u276f"
+          "template": "{{ if .WSL }}\u2771\ue62a{{ end }}{{.Icon}} \u276f"
         }
       ]
     }
