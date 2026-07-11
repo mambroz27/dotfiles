@@ -109,7 +109,7 @@ if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]; then
 fi
 export PATH
 
-# Load Oh My Posh
+# Oh My Posh configuration
 eval "$(oh-my-posh init zsh --config $HOME/.config/oh-my-posh/themes/zen.omp.json)"
 
 # NVM (Node Version Manager) configuration
@@ -117,5 +117,12 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-# Load Angular CLI autocompletion.
+# Angular CLI autocompletion
 source <(ng completion script)
+
+# PNPM (Performant NPM) configuration
+export PNPM_HOME="$HOME/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME/bin:"*) ;;
+  *) export PATH="$PNPM_HOME/bin:$PATH" ;;
+esac
