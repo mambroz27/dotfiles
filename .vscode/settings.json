@@ -5,5 +5,8 @@
     "cSpell.words": [
         "executiontime",
         "rprompt"
-    ]
+    ],
+    "material-icon-theme.files.associations": {
+        "*.colorscheme": "renovate",
+    },
 }
