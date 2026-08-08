@@ -110,7 +110,7 @@ fi
 export PATH
 
 # Oh My Posh configuration
-eval "$(oh-my-posh init zsh --config $HOME/.config/oh-my-posh/themes/zen.omp.json)"
+eval "$(oh-my-posh init zsh --config $HOME/.config/oh-my-posh/themes/tokyo-nightlife.omp.json)"
 
 # NVM (Node Version Manager) configuration
 export NVM_DIR="$HOME/.nvm"
